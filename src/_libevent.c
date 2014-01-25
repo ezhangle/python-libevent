@@ -29,6 +29,10 @@
 #include <event2/thread.h>
 #endif
 
+#ifdef WIN32
+#include <WinSock2.h>
+#endif
+
 #include "pybase.h"
 #include "pyevent.h"
 #include "pybuffer.h"
@@ -188,6 +192,11 @@ init_libevent(void)
     PyObject *m;
     PyObject *base_methods;
     const char **evmethods;
+
+#ifdef WIN32
+    WSADATA wsadata;
+    WSAStartup(0x0101, &wsadata);
+#endif
 
     pylog_callback = NULL;
     pyfatal_callback = NULL;

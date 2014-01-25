@@ -79,6 +79,7 @@ elif os.name == 'nt':
 extens = [
     Extension('_libevent', c_files, libraries=libraries,
         include_dirs=include_dirs, library_dirs=library_dirs,
+        define_macros=[('WIN32', '')],
         extra_link_args=extra_link_args),
 ]
 
